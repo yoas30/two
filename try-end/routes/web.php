@@ -8,3 +8,5 @@ Route::get('/', function () {
 });
 
 Route::get('/data', [DataController::class, 'tampilData']);
+Route::get('/aktivitas', [DataController::class, 'tampilDataAktivitas']);
+Route::delete('/operators/{id}', [DataController::class, 'destroyOperator'])->name('operators.hapus');

@@ -20,4 +20,30 @@ class DataController extends Controller
                 return $response->json(['error' => 'Gagal mengambil data dari API'], 500);
             } 
         }
+
+        public function tampilDataAktivitas()
+        {
+            $response = Http::get('http://localhost:8080/aktivitas');
+
+            //cek request
+            if ($response->successful()) { 
+                // $ambilData = $response->json(); //ubah ke array
+                 $ambilDataAktivitas = collect($response->json())->sortBy('nama_alat')->values(); // ubah ke array dan urutkan berdasarkan 'nama'
+                return view('data.aktivitas', compact('ambilDataAktivitas')); //kirim data ke view
+            } else {
+                return $response->json(['error' => 'Gagal mengambil data dari API'], 500);
+            } 
+        }
+
+    public function destroyOperator($id)
+        {
+            $response = Http::delete("http://localhost:8080/operators/$id");
+
+            if ($response->successful()) {
+                return redirect('/aktivitas')->with('success', 'Data berhasil dihapus');
+            } else {
+                return back()->with('error', 'Gagal menghapus data');
+            }
+        }
+
 }

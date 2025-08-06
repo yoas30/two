@@ -26,7 +26,7 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Name</th>
+                    <th>Nama</th>
                     <th>Operator ID</th>
                     <th>Jabatan</th>
                     <th>Created At</th>
