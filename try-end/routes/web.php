@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Models\DataModels;
+use App\Http\Controllers\DataController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/data', [DataModels::class, 'tampilData']);
+Route::get('/data', [DataController::class, 'tampilData']);
