@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class DataController extends Controller
 {
-        public function tampilData()
+        public function tampilDataOperators()
         {
             $response = Http::get('http://localhost:8080/operators');
 
@@ -21,6 +21,17 @@ class DataController extends Controller
             } 
         }
 
+        public function destroyOperator($operator_id)
+            {
+                $response = Http::delete("http://localhost:8080/operators/$operator_id");
+
+                if ($response->successful()) {
+                    return redirect('/data')->with('success', 'Data berhasil dihapus');
+                } else {
+                    return back()->with('error', 'Gagal menghapus data');
+                }
+            }
+        
         public function tampilDataAktivitas()
         {
             $response = Http::get('http://localhost:8080/aktivitas');
@@ -35,15 +46,15 @@ class DataController extends Controller
             } 
         }
 
-    public function destroyOperator($id)
-        {
-            $response = Http::delete("http://localhost:8080/operators/$id");
+        public function destroyAktivitas($id)
+            {
+                $response = Http::delete("http://localhost:8080/aktivitas/$id");
 
-            if ($response->successful()) {
-                return redirect('/aktivitas')->with('success', 'Data berhasil dihapus');
-            } else {
-                return back()->with('error', 'Gagal menghapus data');
+                if ($response->successful()) {
+                    return redirect('/aktivitas')->with('success', 'Data berhasil dihapus');
+                } else {
+                    return back()->with('error', 'Gagal menghapus data');
+                }
             }
-        }
 
 }

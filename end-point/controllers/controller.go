@@ -55,6 +55,23 @@ func CreateAktivitas(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "Aktivitas berhasil dibuat"})
 }
 
+func DeleteAktivitas(c *gin.Context) {
+	aktivitasID := c.Param("aktivitas_id")
+	
+	if aktivitasID == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "ID aktivitas tidak boleh kosong"})
+		return
+	}
+
+	query := "DELETE FROM aktivitas WHERE id = ?"
+	_, err := db.DB.Exec(query, aktivitasID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Gagal menghapus aktivitas"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Aktivitas berhasil dihapus"})
+}
 //Operators
 
 func GetOperators(c *gin.Context) {
